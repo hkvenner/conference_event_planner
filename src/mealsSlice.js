@@ -1,5 +1,29 @@
 // mealsSlice.js
 import { createSlice } from '@reduxjs/toolkit';
+import {toggleMealSelection} from "./mealsSlice";
+
+const mealsTotalCost = calculateTotalCost("meals");
+
+const calculateTotalCost = (section) => {
+    let totalCost = 0;
+    if (section === "venue"){
+        venueItems.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        });
+    } else if (section === "av"){
+        avItems.forEach((item) => {
+            totalCost += item.cost * item.quantity;
+        });
+    } else if (section === "meals") {
+        mealsItem.forEach((item) => {
+         
+                if (item.selected){
+                    totalCost += item.cost * numberOfPeople;
+                }
+        });
+    }
+    return totalCost;
+};
 
 export const mealsSlice = createSlice({
   name: 'meals',
