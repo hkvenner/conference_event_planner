@@ -1,6 +1,5 @@
 // mealsSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import {toggleMealSelection} from "./mealsSlice";
 
 const mealsTotalCost = calculateTotalCost("meals");
 

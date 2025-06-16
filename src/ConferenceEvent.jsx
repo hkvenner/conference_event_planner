@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { incrementQuantity, decrementQuantity } from "./venueSlice";
 import { incrementAvQuantity, decrementAvQuantity } from "./avSlice";
 import { toggleMealSelection } from "./mealsSlice";
+
 const ConferenceEvent = () => {
     const [showItems, setShowItems] = useState(false);
     const [numberOfPeople, setNumberOfPeople] = useState(1);
@@ -90,7 +91,19 @@ const ConferenceEvent = () => {
                     </thead>
                     <tbody>
                         {items.map((item,index)=> (
-                            
+                            <tr key={index}>
+                                <td>{item.name}</td>
+                                <td>${item.cost}</td>
+                                <td>
+                                    {item.type === "meals" || item.numberOfPeople
+                                    ? ` For ${numberOfPeople} people`
+                                    : item.quantity}                                   
+                                </td>
+                                <td>{item.type === "meals" || item.numberOfPeople
+                                    ? `${item.cost * numberOFPeople}`
+                                    : `${item.cost * item.quantity}`}
+                                </td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>
